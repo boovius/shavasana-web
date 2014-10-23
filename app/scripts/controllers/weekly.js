@@ -8,10 +8,15 @@
  * Controller of the shavasanaApp
  */
 angular.module('shavasanaApp')
-  .controller('WeeklyCtrl', function ($scope, trackers) {
+  .controller('WeeklyCtrl', function ($scope, trackers, TrackerService) {
     $scope.trackers = trackers;
 
     $scope.addValue = function(tracker){
-      tracker.value++;
+      console.log(tracker);
+      var doing = {'activity': tracker.id};
+      TrackerService.add(doing)
+        .success(function(){
+          tracker.value++;
+        });
     };
   });
