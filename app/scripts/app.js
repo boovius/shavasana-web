@@ -31,7 +31,7 @@ angular
         templateUrl: 'views/weekly.html',
         controller: 'WeeklyCtrl',
         resolve: {
-          trackers: ['TrackerService', '$q', function(TrackerService, $q) {
+          activities: ['TrackerService', '$q', function(TrackerService, $q) {
             var deferred = $q.defer();
             TrackerService.fetch()
               .then(function(data) {

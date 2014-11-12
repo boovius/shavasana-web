@@ -1,8 +1,8 @@
 #weekly.container
   %h2
     Weekly
-  .tracker(ng-repeat="tracker in trackers" ng-click="addValue(tracker)")
+  .tracker(ng-repeat="activity in activities" ng-click="addValue(activity)")
     .activity
-      {{tracker.activity}}
+      {{activity.title}}
     .value
-      {{tracker.value}}
+      {{activity.value}}
