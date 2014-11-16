@@ -1,8 +1,15 @@
 #weekly.container
   %h2
     Weekly
-  .tracker(ng-repeat="activity in activities" ng-click="addValue(activity)")
+  #activities(ng-repeat="activity in activities" ng-click="addValue(activity)")
     .activity
       {{activity.title}}
     .value
       {{activity.value}}
+  #create
+    %Button(ng-click="createActivity()" ng-hide="adding")
+      Add
+    #adding(ng-show="adding")
+      %input(type="text" placeholder="new activity")
+      %button(ng-click="createActivity()")
+        Cancel
