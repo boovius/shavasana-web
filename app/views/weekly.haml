@@ -5,11 +5,11 @@
     .activity
       {{activity.title}}
     .value
-      {{activity.value}}
-  #create
-    %Button(ng-click="createActivity()" ng-hide="adding")
-      Add
+      {{ value(activity) }}
+  %form#create
+    %Button(ng-click="flipAdding()")
+      {{addingMessage}}
     #adding(ng-show="adding")
-      %input(type="text" placeholder="new activity")
+      %input(type="text" placeholder="new activity" ng-model="newActivity")
       %button(ng-click="createActivity()")
-        Cancel
+        Create New Activity

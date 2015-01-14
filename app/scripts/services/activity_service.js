@@ -11,13 +11,13 @@ angular.module('shavasanaApp')
   .service('ActivityService', function ActivityService($http) {
     return {
       fetch: function() {
-        return $http.get('http://localhost:9393');
-      },
-      add: function(doing) {
-        return $http.put('http://localhost:9393', doing);
+        return $http.get('http://localhost:9393/activities');
       },
       create: function(activity) {
-        return $http.put('http://localhost:9393', activity);
+        return $http.post('http://localhost:9393/activities', activity);
+      },
+      do: function(doing) {
+        return $http.post('http://localhost:9393/doings', doing);
       }
     };
   });
