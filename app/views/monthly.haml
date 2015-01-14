@@ -1,0 +1,15 @@
+#weekly.container
+  %h2
+    Monthly
+  #activities(ng-repeat="activity in activities" ng-click="addValue(activity)")
+    .activity
+      {{activity.title}}
+    .value
+      {{ value(activity) }}
+  %form#create
+    %Button(ng-click="flipAdding()")
+      {{addingMessage}}
+    #adding(ng-show="adding")
+      %input(type="text" placeholder="new activity" ng-model="newActivity")
+      %button(ng-click="createActivity()")
+        Create New Activity

@@ -20,8 +20,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        redirectTo: '/weekly'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -44,7 +43,24 @@ angular
           }]
         }
       })
+      .when('/monthly', {
+        templateUrl: 'views/monthly.html',
+        controller: 'MonthlyCtrl',
+        resolve: {
+          activities: ['ActivityService', '$q', function(ActivityService, $q) {
+            var deferred = $q.defer();
+            ActivityService.fetch()
+              .then(function(data) {
+                deferred.resolve(data.data);
+              }, function(){
+                deferred.reject();
+              });
+
+              return deferred.promise;
+          }]
+        }
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/weekly'
       });
   });
