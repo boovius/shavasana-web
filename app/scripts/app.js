@@ -20,8 +20,7 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        redirectTo: '/weekly'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -31,9 +30,26 @@ angular
         templateUrl: 'views/weekly.html',
         controller: 'WeeklyCtrl',
         resolve: {
-          trackers: ['TrackerService', '$q', function(TrackerService, $q) {
+          activities: ['ActivityService', '$q', function(ActivityService, $q) {
             var deferred = $q.defer();
-            TrackerService.fetch()
+            ActivityService.fetch()
+              .then(function(data) {
+                deferred.resolve(data.data);
+              }, function(){
+                deferred.reject();
+              });
+
+              return deferred.promise;
+          }]
+        }
+      })
+      .when('/monthly', {
+        templateUrl: 'views/monthly.html',
+        controller: 'MonthlyCtrl',
+        resolve: {
+          activities: ['ActivityService', '$q', function(ActivityService, $q) {
+            var deferred = $q.defer();
+            ActivityService.fetch()
               .then(function(data) {
                 deferred.resolve(data.data);
               }, function(){
@@ -45,6 +61,6 @@ angular
         }
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/weekly'
       });
   });

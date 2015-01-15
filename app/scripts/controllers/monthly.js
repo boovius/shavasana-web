@@ -4,11 +4,11 @@
  * @ngdoc function
  * @name shavasanaApp.controller:WeeklyCtrl
  * @description
- * # WeeklyCtrl
+ * # MonthlyCtrl
  * Controller of the shavasanaApp
  */
 angular.module('shavasanaApp')
-  .controller('WeeklyCtrl', function ($scope, activities, ActivityService) {
+  .controller('MonthlyCtrl', function ($scope, activities, ActivityService) {
     $scope.newActivity = null;
     $scope.activities = activities;
     console.log(activities);
@@ -19,7 +19,7 @@ angular.module('shavasanaApp')
       var doing = {'activity': activity.id};
       ActivityService.do(doing)
         .success(function(){
-          activity.weekly++;
+          activity.monthly++;
         });
     };
 
@@ -33,13 +33,13 @@ angular.module('shavasanaApp')
     };
 
     $scope.value = function(activity) {
-      if (activity.weekly === 0) {
+      if (activity.monthly === 0) {
         var today = new Date();
         var last  = new Date(activity.doneLastAt);
         var daysAgo = Math.floor((today-last)/86400000);
         return daysAgo + ' days ago';
       } else {
-        return activity.weekly;
+        return activity.monthly;
       }
     };
 

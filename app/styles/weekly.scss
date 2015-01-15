@@ -1,11 +1,10 @@
 #weekly {
   padding-bottom: 2em;
 
-  .tracker {
+  #activities {
     background: #ccc;
     overflow: auto;
     margin-left: 5em;
-    float: left;
     cursor: pointer;
     margin-bottom: 2em;
     width: 60%;
@@ -18,11 +17,17 @@
 
     .activity {
       border-right: 2px solid black;
-      width: 75%;
+      width: 70%;
     }
   }
 
-  .tracker:active {
+  #activity:active {
     background: #8e88db;
+  }
+
+  #create {
+    a {
+      cursor: pointer;
+    }
   }
 }
