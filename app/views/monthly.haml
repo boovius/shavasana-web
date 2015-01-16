@@ -7,9 +7,9 @@
     .value
       {{ value(activity) }}
   %form#create
-    %Button(ng-click="flipAdding()")
+    %button.btn(ng-click="flipAdding()" ng-class="adding?'btn-danger':'btn-primary'")
       {{addingMessage}}
     #adding(ng-show="adding")
       %input(type="text" placeholder="new activity" ng-model="newActivity")
-      %button(ng-click="createActivity()")
+      %button.btn.btn-success(ng-click="createActivity()")
         Create New Activity
