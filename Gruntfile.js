@@ -6,17 +6,11 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-function isDevelopmentEnvironment() {
-    return grunt.file.exists('.env') &&
-           grunt.file.read('.env').indexOf('NODE_ENV=development') !== -1;
-}
 
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
-  if (isDevelopmentEnvironment) {
-    require('load-grunt-tasks')(grunt);
-  }
+  require('load-grunt-tasks')(grunt);
 
   grunt.loadNpmTasks('grunt-haml');
 
