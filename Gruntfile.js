@@ -69,6 +69,48 @@ module.exports = function (grunt) {
       }
     },
 
+    ngconstant: {
+      // Environment targets
+      development: {
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        options: {
+          name: 'config',
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'development',
+            serverPath: 'http://localhost:9393/',
+          }
+        }
+      },
+      test: {
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        options: {
+          name: 'config',
+          dest: 'test/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'test',
+            serverPath: 'http://localhost:9393/',
+          }
+        }
+      },
+      production: {
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        options: {
+          name: 'config',
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'production',
+            serverPath: 'http://shavasana-server.herokuapp.com/',
+          }
+        }
+      },
+
     // The actual grunt server settings
     connect: {
       options: {
@@ -424,6 +466,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'ngconstant:development',
       'clean:server',
       'wiredep',
       'haml:dev',
@@ -470,7 +513,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('heroku:production', [
+  grunt.registerTask('heroku:production', ['ngconstant:production',
     'build']);
 
   grunt.registerTask('default', [

@@ -23,6 +23,7 @@
     "grunt-haml": "^0.9.0",
     "grunt-karma": "~0.8.3",
     "grunt-newer": "^0.7.0",
+    "grunt-ng-constant": "^1.0.0",
     "grunt-ngmin": "^0.0.3",
     "grunt-svgmin": "^0.4.0",
     "grunt-usemin": "^2.1.1",
@@ -37,7 +38,7 @@
   "engines": {
     "node": ">=0.10.0"
   },
-    "scripts": {
+  "scripts": {
     "test": "grunt test",
     "postinstall": "node_modules/bower/bin/bower install"
   }
