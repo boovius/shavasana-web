@@ -52,7 +52,7 @@ module.exports = function (grunt) {
       },
       haml: {
         files: ['<%= yeoman.app %>/views/{,*/}*.haml'],
-        tasks: ['haml:dist']
+        tasks: ['haml:dev']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -167,12 +167,21 @@ module.exports = function (grunt) {
     },
 
     haml: {
-      dist: {
+      dev: {
         files: [{
           expand: true,
           cwd:  '<%= yeoman.app %>/views',
           src:  '{,*/}*.haml',
           dest: '.tmp/views',
+          ext:  '.html'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd:  '<%= yeoman.app %>/views',
+          src:  '{,*/}*.haml',
+          dest: __dirname + '/dist/views',
           ext:  '.html'
         }]
       }
@@ -417,7 +426,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
-      'haml:dist',
+      'haml:dev',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
