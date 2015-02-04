@@ -12,8 +12,6 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  grunt.loadNpmTasks('grunt-haml');
-
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -80,7 +78,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            serverPath: 'http://localhost:9393/',
+            serverPath: 'http://localhost:9393/'
           }
         }
       },
@@ -93,7 +91,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'test',
-            serverPath: 'http://localhost:9393/',
+            serverPath: 'http://localhost:9393/'
           }
         }
       },
@@ -106,10 +104,11 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            serverPath: 'http://shavasana-server.herokuapp.com/',
+            serverPath: 'http://shavasana-server.herokuapp.com/'
           }
         }
-      },
+      }
+    },
 
     // The actual grunt server settings
     connect: {
