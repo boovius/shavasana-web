@@ -18,7 +18,7 @@ angular
     'ngTouch',
     'config'
   ])
-  .config(function ($routeProvider, ENV) {
+  .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         redirectTo: '/weekly'
@@ -32,7 +32,6 @@ angular
         controller: 'WeeklyCtrl',
         resolve: {
           activities: ['ActivityService', '$q', function(ActivityService, $q) {
-            console.log(ENV.serverPath);
             var deferred = $q.defer();
             ActivityService.fetch()
               .then(function(data) {
