@@ -23,6 +23,27 @@ angular
       .when('/', {
         redirectTo: '/weekly'
       })
+      .when('/login', {
+        resolve: {
+          login: ['$q', '$location', '$cookies', 'User', function($q, $location, $cookies, User) {
+            var token = $location.$$search.token || $cookies.token;
+            // if no token redirect to ENV['server/login']
+            if (token) {
+              $cookies.token = token || $cookies.token;
+              window.localStorage.setItem('token', token);
+              $http.defaults.headers.common['X-Authorization'] = TokenService.sanitize();
+              var deferred = $q.defer();
+              User.fetch()
+                .then(function(){
+                  // redirect to home/weekly
+                })
+                .catch(function(){
+                  // redirect back to server login
+                });
+            }
+          }]
+        }
+      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
