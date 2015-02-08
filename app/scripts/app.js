@@ -18,27 +18,25 @@ angular
     'ngTouch',
     'config'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, ENV) {
     $routeProvider
       .when('/', {
         redirectTo: '/weekly'
       })
       .when('/login', {
         resolve: {
-          login: ['$q', '$location', '$cookies', 'User', function($q, $location, $cookies, User) {
+          login: ['$q', '$location', '$window', '$cookies', '$http', 'User', function($q, $location, $window, $cookies, $http, User) {
             var token = $location.$$search.token || $cookies.token;
-            // if no token redirect to ENV['server/login']
             if (token) {
               $cookies.token = token || $cookies.token;
               window.localStorage.setItem('token', token);
-              $http.defaults.headers.common['X-Authorization'] = TokenService.sanitize();
-              var deferred = $q.defer();
+              $http.defaults.headers.common['X-Authorization'] = token;
               User.fetch()
                 .then(function(){
-                  // redirect to home/weekly
+                  $location.url('/weekly');
                 })
                 .catch(function(){
-                  // redirect back to server login
+                  $window.location.href = ENV.serverPath;
                 });
             }
           }]
