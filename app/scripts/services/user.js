@@ -11,12 +11,12 @@ angular.module('shavasanaApp')
   .service('User', function User($http, ENV, $q) {
     var defered = $q.defer();
     var currentUser;
-    var UserService = {};
+    var User = {};
 
-    UserService.fetch = function() {
+    User.fetch = function() {
       $http.get(ENV.serverPath + 'users').
         then(function(userPromise){
-          UserService.setCurrentUser(userPromise.data);
+          User.setCurrentUser(userPromise.data);
           defered.resolve(userPromise);
         }).
         catch(function(){
@@ -26,11 +26,13 @@ angular.module('shavasanaApp')
       return defered.promise;
     };
 
-    UserService.currentUser = function() {
+    User.getCurrentUser = function() {
+      console.log("in getCurrentUser");
+      console.log(currentUser);
       if (currentUser) {
         defered.resolve(currentUser);
       } else {
-        UserService.fetch().then(function(userPromise){
+        User.fetch().then(function(userPromise){
           defered.resolve(userPromise.data);
         });
       }
@@ -38,9 +40,12 @@ angular.module('shavasanaApp')
       return defered.promise;
     };
 
-    UserService.setCurrentUser = function(userData) {
+    User.setCurrentUser = function(userData) {
+      console.log("in setCurrentUser");
+      console.log(userData);
       currentUser = userData;
+      console.log(currentUser);
     };
 
-    return UserService;
+    return User;
   });

@@ -8,10 +8,12 @@
  * Controller of the shavasanaApp
  */
 angular.module('shavasanaApp')
-  .controller('WeeklyCtrl', function ($scope, activities, ActivityService) {
+  .controller('WeeklyCtrl', function ($scope, activities, ActivityService, User) {
+    $scope.user = User.getCurrentUser();
+    console.log('in weekly controller');
+    console.log($scope.user);
     $scope.newActivity = null;
     $scope.activities = activities;
-    console.log(activities);
     $scope.adding = false;
     $scope.addingMessage = 'Add New Activity';
 
