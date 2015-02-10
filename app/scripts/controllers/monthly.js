@@ -8,10 +8,10 @@
  * Controller of the shavasanaApp
  */
 angular.module('shavasanaApp')
-  .controller('MonthlyCtrl', function ($scope, activities, ActivityService) {
+  .controller('MonthlyCtrl', function ($scope, activities, ActivityService, user) {
+    $scope.user = user;
     $scope.newActivity = null;
     $scope.activities = activities;
-    console.log(activities);
     $scope.adding = false;
     $scope.addingMessage = 'Add New Activity';
 

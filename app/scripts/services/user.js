@@ -9,43 +9,29 @@
  */
 angular.module('shavasanaApp')
   .service('User', function User($http, ENV, $q) {
-    var defered = $q.defer();
+    var deferred = $q.defer();
     var currentUser;
-    var User = {};
+    var UserService = {};
 
-    User.fetch = function() {
-      $http.get(ENV.serverPath + 'users').
-        then(function(userPromise){
-          User.setCurrentUser(userPromise.data);
-          defered.resolve(userPromise);
-        }).
-        catch(function(){
-          defered.reject();
-        });
-
-      return defered.promise;
+    UserService.fetch = function() {
+      return $http.get(ENV.serverPath + 'users');
     };
 
-    User.getCurrentUser = function() {
-      console.log("in getCurrentUser");
-      console.log(currentUser);
+    UserService.getCurrentUser = function() {
       if (currentUser) {
-        defered.resolve(currentUser);
+        return currentUser;
       } else {
-        User.fetch().then(function(userPromise){
-          defered.resolve(userPromise.data);
+        UserService.fetch().then(function(userPromise){
+          deferred.resolve(userPromise.data);
         });
       }
 
-      return defered.promise;
+      return deferred.promise;
     };
 
-    User.setCurrentUser = function(userData) {
-      console.log("in setCurrentUser");
-      console.log(userData);
-      currentUser = userData;
-      console.log(currentUser);
+    UserService.setCurrentUser = function(user) {
+      currentUser = user;
     };
 
-    return User;
+    return UserService;
   });
