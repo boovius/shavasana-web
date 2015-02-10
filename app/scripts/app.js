@@ -36,6 +36,8 @@ angular
                 .catch(function(){
                   $window.location.href = ENV.serverPath;
                 });
+            } else {
+              $window.location.href = ENV.serverPath;
             }
           }]
         }
@@ -91,7 +93,6 @@ angular
             var deferred = $q.defer();
             User.fetch()
               .then(function(userPromise) {
-                console.log(userPromise.data);
                 User.setCurrentUser(userPromise.data);
                 deferred.resolve(userPromise.data);
               }, function() {
