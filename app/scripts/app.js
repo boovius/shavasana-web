@@ -25,12 +25,13 @@ angular
       })
       .when('/login', {
         resolve: {
-          login: ['$q', '$location', '$window', '$cookies', '$http', 'User', 'TokenService', function($q, $location, $window, $cookies, $http, User, TokenService) {
+          login: ['$q', '$location', '$window', '$cookies', '$http', 'UserService', 'TokenService', function($q, $location, $window, $cookies, $http, UserService, TokenService) {
             var token = $location.$$search.token || $cookies.token;
             if (token) {
               TokenService.set(token);
-              User.fetch()
-                .then(function() {
+              UserService.fetch()
+                .then(function(userPromise) {
+                  UserService.setCurrentUserPromise(userPromise);
                   $location.url('/weekly');
                 })
                 .catch(function(){
@@ -61,11 +62,10 @@ angular
 
               return deferred.promise;
           }],
-          user: ['User', '$q', function(User, $q) {
+          user: ['UserService', '$q', function(UserService, $q) {
             var deferred = $q.defer();
-            User.fetch()
+            UserService.getCurrentUserPromise()
               .then(function(userPromise) {
-                User.setCurrentUser(userPromise.data);
                 deferred.resolve(userPromise.data);
               }, function() {
                 deferred.reject();
@@ -89,11 +89,10 @@ angular
 
               return deferred.promise;
           }],
-          user: ['User', '$q', function(User, $q) {
+          user: ['UserService', '$q', function(UserService, $q) {
             var deferred = $q.defer();
-            User.fetch()
+            UserService.getCurrentUserPromise()
               .then(function(userPromise) {
-                User.setCurrentUser(userPromise.data);
                 deferred.resolve(userPromise.data);
               }, function() {
                 deferred.reject();

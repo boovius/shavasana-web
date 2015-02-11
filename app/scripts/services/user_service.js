@@ -8,29 +8,30 @@
  * Service in the shavasanaApp.
  */
 angular.module('shavasanaApp')
-  .service('User', function User($http, ENV, $q) {
+  .service('UserService', function User($http, ENV, $q) {
     var deferred = $q.defer();
-    var currentUser;
+    var currentUserPromise;
     var UserService = {};
 
     UserService.fetch = function() {
       return $http.get(ENV.serverPath + 'users');
     };
 
-    UserService.getCurrentUser = function() {
-      if (currentUser) {
-        return currentUser;
+    UserService.getCurrentUserPromise = function() {
+      if (currentUserPromise) {
+        deferred.resolve(currentUserPromise);
       } else {
         UserService.fetch().then(function(userPromise){
-          deferred.resolve(userPromise.data);
+          UserService.setCurrentUserPromise(userPromise);
+          deferred.resolve(userPromise);
         });
       }
 
       return deferred.promise;
     };
 
-    UserService.setCurrentUser = function(user) {
-      currentUser = user;
+    UserService.setCurrentUserPromise = function(userPromise) {
+      currentUserPromise = userPromise;
     };
 
     return UserService;
