@@ -72,8 +72,8 @@ module.exports = function (grunt) {
       development: {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         options: {
-          name: 'config',
-          dest: '<%= yeoman.app %>/scripts/config.js'
+          name: 'env',
+          dest: '<%= yeoman.app %>/scripts/env.js'
         },
         constants: {
           ENV: {
@@ -85,8 +85,8 @@ module.exports = function (grunt) {
       test: {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         options: {
-          name: 'config',
-          dest: 'test/config.js'
+          name: 'env',
+          dest: 'test/env.js'
         },
         constants: {
           ENV: {
@@ -98,8 +98,8 @@ module.exports = function (grunt) {
       production: {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         options: {
-          name: 'config',
-          dest: '<%= yeoman.app %>/scripts/config.js'
+          name: 'env',
+          dest: '<%= yeoman.app %>/scripts/env.js'
         },
         constants: {
           ENV: {
