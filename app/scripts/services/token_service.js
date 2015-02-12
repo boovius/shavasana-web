@@ -14,11 +14,11 @@ angular.module('shavasanaApp')
 
     TokenService.get = function() {
       if (token) {
-        return token
+        return token;
       } else {
         TokenService.set();
         return token;
-      };
+      }
     };
 
     TokenService.set = function() {
