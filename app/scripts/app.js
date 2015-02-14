@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'env'
   ])
-  .config(function ($routeProvider, ENV) {
+  .config(function ($httpProvider, $routeProvider, ENV) {
+    $httpProvider.interceptors.push('authInterceptor');
+
     $routeProvider
       .when('/', {
         redirectTo: '/weekly'
@@ -98,6 +100,15 @@ angular
                 deferred.reject();
               });
             return deferred.promise;
+          }]
+        }
+      })
+      .when('/unauthorized', {
+        resolve: {
+          deleteInvalidToken: ['$window', 'TokenService', function($window, TokenService){
+            alert('sorry your session is invalid, please sign in again');
+            TokenService.clearInvalidToken();
+            $window.location.href = ENV.serverPath;
           }]
         }
       })

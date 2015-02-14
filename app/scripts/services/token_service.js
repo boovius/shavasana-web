@@ -8,7 +8,7 @@
  * Service in the shavasanaApp.
  */
 angular.module('shavasanaApp')
-  .service('TokenService', function tokenService($http, $location, $cookies, $window, ENV) {
+  .service('TokenService', function tokenService($http, $location, $cookies, $cookieStore, $window, ENV) {
     var token;
     var TokenService = {};
 
@@ -31,6 +31,12 @@ angular.module('shavasanaApp')
         $window.location.href = ENV.serverPath;
       }
     };
+
+    TokenService.clearInvalidToken = function() {
+      $cookieStore.remove('token');
+      $http.defaults.headers.common['X-Authorization'] = null;
+      window.localStorage.clear();
+    }
 
     return TokenService;
   });
