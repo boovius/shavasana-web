@@ -28,19 +28,22 @@ angular
       .when('/login', {
         resolve: {
           login: ['$q', '$location', '$window', '$cookies', '$http', 'UserService', 'TokenService', function($q, $location, $window, $cookies, $http, UserService, TokenService) {
+            var deferred = $q.defer();
             var token = $location.$$search.token || $cookies.token;
             if (token) {
               TokenService.set(token);
               UserService.fetch()
                 .then(function(userPromise) {
                   UserService.setCurrentUserPromise(userPromise);
+                  deferred.resolve(userPromise);
                   $location.url('/weekly');
+                }, function(){
+                  deferred.reject();
                 })
-                .catch(function(){
-                  $window.location.href = ENV.serverPath;
-                });
+
+                return deferred.promise;
             } else {
-              $window.location.href = ENV.serverPath;
+              $window.location.href = ENV.serverPath + 'login';
             }
           }]
         }
@@ -108,7 +111,7 @@ angular
           deleteInvalidToken: ['$window', 'TokenService', function($window, TokenService){
             alert('sorry your session is invalid, please sign in again');
             TokenService.clearInvalidToken();
-            $window.location.href = ENV.serverPath;
+            $window.location.href = ENV.serverPath + 'login';
           }]
         }
       })

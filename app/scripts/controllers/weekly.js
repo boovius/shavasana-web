@@ -34,6 +34,9 @@ angular.module('shavasanaApp')
 
     $scope.value = function(activity) {
       if (activity.weekly === 0) {
+        if (activity.doneLastAt === null) {
+          return 'not done yet :)';
+        }
         var today = new Date();
         var last  = new Date(activity.doneLastAt);
         var daysAgo = Math.floor((today-last)/86400000);
