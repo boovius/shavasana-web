@@ -1,19 +1,24 @@
 #weekly {
   padding-bottom: 2em;
 
-  #activities {
-    border-radius: 4px;
+  .activities {
+    border-radius: 2px;
     border: 1px solid #ccc;
-    background-color: #eee;
     overflow: auto;
-    margin-left: 5em;
     cursor: pointer;
-    margin-bottom: 2em;
-    width: 70%;
+    margin-bottom: .5em;
+    width: 90%;
+    margin-left: 1em;
+    font-size: 1.5em;
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+      margin-bottom: 0.3em;
+      width: 100%;
+      margin-left: 0;
+      font-size: 1em;
+    }
 
     .activity, .value {
-      font-size: 1.5em;
-      padding: 1em 2em;
+      padding: 1em 1em;
       float: left;
     }
 
