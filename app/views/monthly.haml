@@ -1,7 +1,7 @@
-#weekly.container
+#weekly
   %h2
     {{user.first_name}}'s Monthly
-  #activities(ng-repeat="activity in activities" ng-click="addValue(activity)")
+  .activities(ng-repeat="activity in activities" ng-click="addValue(activity)")
     .activity
       {{activity.title}}
     .value

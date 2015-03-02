@@ -2,10 +2,7 @@
   padding-bottom: 2em;
 
   .activities {
-    border-radius: 2px;
-    border: 1px solid #ccc;
     overflow: auto;
-    cursor: pointer;
     margin-bottom: .5em;
     width: 90%;
     margin-left: 1em;
@@ -17,14 +14,27 @@
       font-size: 1em;
     }
 
+    .activities:hover {
+      background-color: #e23437;
+    }
+
     .activity, .value {
       padding: 1em 1em;
       float: left;
     }
 
     .activity {
-      border-right: 2px solid #ccc;
+      // border-right: 2px solid #ccc;
       width: 55%;
+    }
+
+    .value {
+      cursor: pointer;
+      width: 45%;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      text-align: center;
+      background-color: #eee;
     }
   }
 
