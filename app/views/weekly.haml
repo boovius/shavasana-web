@@ -1,9 +1,16 @@
 #weekly
-  %h2
-    {{user.first_name}}'s Weekly
-  .activities(ng-repeat="activity in activities" ng-click="addValue(activity)")
-    .activity
-      {{activity.title}}:
+  .top
+    %h2
+      {{user.first_name}}'s Weekly
+  .filter
+    %label.search(for="search")
+      .span.glyphicon.glyphicon-search
+    %input(id="search" ng-model="search")
+  .activities(ng-repeat="activity in activities | filter:search")
+    .activity(ng-click="addValue(activity)")
+      .title
+        {{activity.title}}
+      .plus.span.glyphicon.glyphicon-plus
     .value
       {{ value(activity) }}
   %form#create

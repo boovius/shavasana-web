@@ -1,5 +1,35 @@
+$light-gray: #eee;
+
 #weekly {
   padding-bottom: 2em;
+
+  .filter {
+    margin-bottom: 1em;
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+      margin-bottom: 0.5em;
+    }
+
+    .search {
+      margin-left: 2.5em;
+      @media only screen and (min-width: 320px) and (max-width: 480px) {
+        margin-left: 0.5em;
+      }
+      margin-right: 0.5em;
+      position: relative;
+      right: -0.5em;
+    }
+
+    input {
+      border-radius: 20px;
+      width: 45%;
+      @media only screen and (min-width: 320px) and (max-width: 480px) {
+        width: 50%;
+      }
+      padding-left: 1.75em;
+      margin-left: -1.5em;
+      line-height: 2em;
+    }
+  }
 
   .activities {
     overflow: auto;
@@ -14,27 +44,35 @@
       font-size: 1em;
     }
 
-    .activities:hover {
-      background-color: #e23437;
-    }
-
     .activity, .value {
-      padding: 1em 1em;
+      padding: 0.6em 1em;
       float: left;
     }
 
     .activity {
-      // border-right: 2px solid #ccc;
-      width: 55%;
-    }
-
-    .value {
       cursor: pointer;
-      width: 45%;
+      width: 55%;
       border-radius: 25px;
       border: 1px solid #ccc;
       text-align: center;
-      background-color: #eee;
+      background-color: $light-gray;
+
+      .title {
+        float: left;
+      }
+
+      .plus {
+        float: right;
+        margin-left: 2em;
+      }
+    }
+
+    .activity:hover {
+      background-color: #e23437;
+    }
+
+    .value {
+      width: 45%;
     }
   }
 
