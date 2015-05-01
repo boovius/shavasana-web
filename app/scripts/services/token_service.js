@@ -36,7 +36,7 @@ angular.module('shavasanaApp')
       $cookieStore.remove('token');
       $http.defaults.headers.common['X-Authorization'] = null;
       window.localStorage.clear();
-    }
+    };
 
     return TokenService;
   });

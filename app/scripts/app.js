@@ -39,7 +39,7 @@ angular
                   $location.url('/weekly');
                 }, function(){
                   deferred.reject();
-                })
+                });
 
                 return deferred.promise;
             } else {
@@ -109,7 +109,7 @@ angular
       .when('/unauthorized', {
         resolve: {
           deleteInvalidToken: ['$window', 'TokenService', function($window, TokenService){
-            alert('sorry your session is invalid, please sign in again');
+            //alert('sorry your session is invalid, please sign in again');
             TokenService.clearInvalidToken();
             $window.location.href = ENV.serverPath + 'login';
           }]
