@@ -14,6 +14,42 @@ angular.module('shavasanaApp')
     $scope.activities = activities;
     $scope.adding = false;
     $scope.addingMessage = 'Add New Activity';
+    $scope.period = 'weekly';
+
+    $scope.togglePeriod = function() {
+      if ($scope.period === 'weekly') {
+        $scope.period = 'monthly';
+      } else {
+        $scope.period = 'weekly';
+      }
+      $scope.$apply();
+    };
+
+    $scope.value = function(activity) {
+      if (activity.doneLastAt === null) {
+        return 'not done yet :)';
+      }
+      if ($scope.period === 'weekly') {
+        if (activity.weekly === 0) {
+          return doneLast(activity);
+        } else {
+          return activity.weekly;
+        }
+      } else {
+        if (activity.monthly === 0) {
+          return doneLast(activity);
+        } else {
+          return activity.monthly;
+        }
+      }
+    };
+
+    var doneLast = function(activity) {
+      var today = new Date();
+      var last  = new Date(activity.doneLastAt);
+      var daysAgo = Math.floor((today-last)/86400000);
+      return daysAgo + ' days ago';
+    };
 
     $scope.addValue = function(activity){
       var doing = {'activity': activity.id};
@@ -29,20 +65,6 @@ angular.module('shavasanaApp')
         $scope.addingMessage = 'Cancel';
       } else {
         $scope.addingMessage = 'Add New Activity';
-      }
-    };
-
-    $scope.value = function(activity) {
-      if (activity.weekly === 0) {
-        if (activity.doneLastAt === null) {
-          return 'not done yet :)';
-        }
-        var today = new Date();
-        var last  = new Date(activity.doneLastAt);
-        var daysAgo = Math.floor((today-last)/86400000);
-        return daysAgo + ' days ago';
-      } else {
-        return activity.weekly;
       }
     };
 

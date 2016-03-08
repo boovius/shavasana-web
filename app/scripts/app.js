@@ -39,7 +39,7 @@ angular
                   $location.url('/weekly');
                 }, function(){
                   deferred.reject();
-                })
+                });
 
                 return deferred.promise;
             } else {

@@ -2,10 +2,12 @@
   .top
     %h2
       {{user.first_name}}'s Weekly
-  .filter
+  .controls
     %label.search(for="search")
       .span.glyphicon.glyphicon-search
     %input(id="search" ng-model="search")
+    %button.btn.btn-default(ng-click="togglePeriod()")
+      {{ period }}
   .activities(ng-repeat="activity in activities | filter:search")
     .activity(ng-click="addValue(activity)")
       .title

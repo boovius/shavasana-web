@@ -11,6 +11,7 @@ angular.module('shavasanaApp')
   .service('authInterceptor', function authInterceptor($q, $location) {
     return {
       response: function(response){
+        console.log(response);
         return response || $q.when(response);
       },
       responseError: function(rejection) {
